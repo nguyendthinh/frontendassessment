@@ -4,9 +4,8 @@ import Recipe from './Recipe';
 export default function ListView({recipes, specials}) {
 
   function findSpecials(ingredientID){
-    var currentSpecialIndex = specials.findIndex(special => special.ingredientId === ingredientID)
+    var specialIndex = specials.findIndex(special => special.ingredientId === ingredientID)
 
-    setSpecialIndex(currentSpecialIndex)
   }
 
   return (
