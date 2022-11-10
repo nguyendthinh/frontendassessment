@@ -22,12 +22,14 @@ export default function Recipe({ recipe, specials }) {
       {recipe.title}
       <img src={recipe.images.small} />
       <button onClick={openModal}>View Details</button>
+
       <Modal
         isOpen={modalVisible}
         onRequestClose={closeModal}
       >
         <RecipeDetails recipe={recipe} specials={specials}/>
       </Modal>
+      
     </div>
   )
 }

@@ -18,14 +18,12 @@ function App() {
     fetch(recipeLink)
     .then((response) => response.json())
     .then((recipes) => {
-      console.log(recipes);
       setRecipes(recipes)}
     );
 
     fetch(specialsLink)
     .then((response) => response.json())
     .then((specials) => {
-      console.log(specials);
       setSpecials(specials)}
     );
 
