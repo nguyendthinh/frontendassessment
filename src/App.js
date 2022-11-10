@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import ListView from './components/ListView';
 
 function App() {
+
+  const [recipes, setRecipes] = useState([])
+  const [specials, setSpecials] = useState([])
+
+  useEffect(() => {
+    getRecipesAndSpecials()
+  }, [])
+
+  function getRecipesAndSpecials() {
+    var recipeLink = "http://localhost:3001/recipes";
+    var specialsLink = "http://localhost:3001/specials";
+
+    fetch(recipeLink)
+    .then((response) => response.json())
+    .then((recipes) => {
+      console.log(recipes);
+      setRecipes(recipes)}
+    );
+
+    fetch(specialsLink)
+    .then((response) => response.json())
+    .then((specials) => {
+      console.log(specials);
+      setSpecials(specials)}
+    );
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ListView recipes={recipes} specials={specials}/>
+    </>
   );
 }
 
