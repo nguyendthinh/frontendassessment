@@ -48,13 +48,13 @@ function App() {
   return (
     <>
       <Container fluid="true">
-        <ListView recipes={recipes} specials={specials}/>
+        <ListView recipes={recipes} specials={specials} setRecipes={setRecipes}/>
 
         <Modal
           isOpen={formVisible}
           onRequestClose={closeForm}
         >
-          <AddForm addOrUpdate={"add"} recipe={null} />
+          <AddForm addOrUpdate={"add"} recipe={null} closeForm={closeForm} setRecipes={setRecipes}/>
         </Modal>
 
        {<Button onClick={openForm} className="viewButton">Add</Button>}

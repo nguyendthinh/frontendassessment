@@ -5,8 +5,9 @@ import IngredientsSection from './IngredientsSection';
 import DirectionsSection from './DirectionsSection';
 import GeneralSection from './GeneralSection';
 
-export default function AddForm({addOrUpdate, recipe}) {
+export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
 
+  const recipeLink = "http://localhost:3001/recipes/"
   const emptyIngredientsField = [{amount: "", measurement: "", name: ""}]
   const emptyDirectionsField = [{instructions: "", optional: ""}]
 
@@ -16,15 +17,42 @@ export default function AddForm({addOrUpdate, recipe}) {
       directions: addOrUpdate === "add" ? emptyDirectionsField : recipe.directions,
     }
   });
+
   const {fields: ingredientFields, append: ingredientAppend} = useFieldArray({
     control,
     name: "ingredients"
   })
+
   const {fields: directionFields, append: directionAppend} = useFieldArray({
     control,
     name: "directions"
   })
-  const recipeLink = "http://localhost:3001/recipes/"
+
+
+  function addInputRows(type){
+      if (type === "ingredient") {
+        ingredientAppend({amount: "", measurement: "", name: ""})
+      } else if (type === "direction") {
+        directionAppend({instructions: "", optional: false})
+      }
+  }
+
+  function updateRecipeState(addOrUpdate, data){
+
+    if (addOrUpdate === "add") {
+      setRecipes(prevRecipes => {
+        return [...prevRecipes, data]
+      })
+    } else if (addOrUpdate === "update") {
+      setRecipes(prevRecipes => {
+        let cloneRecipe = [...prevRecipes]
+        const recipeIndex = cloneRecipe.findIndex(clone => clone.uuid === recipe.uuid)
+        cloneRecipe[recipeIndex] = data
+        return cloneRecipe
+      })
+    }
+
+  }
 
   function addOrUpdateRecipe(data, addOrUpdate) {
     data.images = null
@@ -40,6 +68,8 @@ export default function AddForm({addOrUpdate, recipe}) {
         })
         .then((response) => response.json())
         .then((data) => {
+          updateRecipeState(addOrUpdate, data)
+          closeForm()
           console.log('Success:', data);
         })
         .catch((error) => {
@@ -57,22 +87,15 @@ export default function AddForm({addOrUpdate, recipe}) {
         })
         .then((response) => response.json())
         .then((data) => {
+          updateRecipeState(addOrUpdate, data)
+          closeForm()
           console.log('Success:', data);
         })
         .catch((error) => {
           console.error('Error:', error);
         });
-
     }
 
-  }
-
-  function addInputRows(type){
-    if (type === "ingredient") {
-      ingredientAppend({amount: "", measurement: "", name: ""})
-    } else if (type === "direction") {
-      directionAppend({instructions: "", optional: false})
-    }
   }
 
   return (

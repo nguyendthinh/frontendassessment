@@ -5,7 +5,7 @@ import RecipeDetails from './RecipeDetails';
 import AddForm from './AddForm';
 import { Button, Col } from 'react-bootstrap';
 
-export default function Recipe({ recipe, specials }) {
+export default function Recipe({ recipe, specials, setRecipes }) {
 
   const [detailsVisible, setDetailsVisibile] = useState(false);
   const [updateVisible, setUpdateVisibile] = useState(false);
@@ -22,7 +22,7 @@ export default function Recipe({ recipe, specials }) {
     setUpdateVisibile(true);
   }
 
-  function closeUpdate() {
+  function closeForm() {
     setUpdateVisibile(false);
   }
 
@@ -42,10 +42,9 @@ export default function Recipe({ recipe, specials }) {
 
       <Modal
         isOpen={updateVisible}
-        onRequestClose={closeUpdate}
+        onRequestClose={closeForm}
       >
-        {/*<UpdateForm recipe={recipe} specials={specials}/>*/}
-        <AddForm addOrUpdate={"update"} recipe={recipe} />
+        <AddForm addOrUpdate={"update"} recipe={recipe} closeForm={closeForm} setRecipes={setRecipes}/>
       </Modal>
 
     </Col>
