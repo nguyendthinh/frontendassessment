@@ -1,4 +1,50 @@
-.App {
+.circleIcon {
+  border-radius: 50%;
+  width: 11em;
+  height: 11em;
+}
+
+.detailPic {
+  border-radius: 1em;
+  margin-top: 1em;
+}
+
+.ReactModal__Content {
+    margin: auto;
+    width: 40em;
+    border: none !important;
+    background-color: #f5f5f5 !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.specials {
+  font-size: small;
+  font-weight: bold;
+  color: #ff4500;
+}
+
+.viewButton {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+}
+
+.viewButton:hover {
+  background-color: orange;
+  border: 1px solid orange;
+  color: black;
+}
+
+.yellowSquare {
+  background-color: #f4ca16;
+  border-radius: .5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-right: 1em;
+  margin-top: 5em;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +81,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

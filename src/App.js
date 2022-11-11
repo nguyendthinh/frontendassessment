@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import ListView from './components/ListView';
+import AddForm from './components/AddForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import Modal from 'react-modal';
+import ReactDOM from 'react-dom';
+import { Button, Col, Row, Container } from 'react-bootstrap';
+
+Modal.setAppElement("#root");
 
 function App() {
 
   const [recipes, setRecipes] = useState([])
   const [specials, setSpecials] = useState([])
+  const [formVisible, setFormVisibile] = useState(false);
+  const recipeLink = "http://localhost:3001/recipes";
+  const specialsLink = "http://localhost:3001/specials";
+
+  function openForm() {
+    setFormVisibile(true);
+  }
+
+  function closeForm() {
+    setFormVisibile(false);
+  }
 
   useEffect(() => {
     getRecipesAndSpecials()
   }, [])
 
   function getRecipesAndSpecials() {
-    var recipeLink = "http://localhost:3001/recipes";
-    var specialsLink = "http://localhost:3001/specials";
 
     fetch(recipeLink)
     .then((response) => response.json())
@@ -31,7 +47,19 @@ function App() {
 
   return (
     <>
-      <ListView recipes={recipes} specials={specials}/>
+      <Container fluid="true">
+        <ListView recipes={recipes} specials={specials}/>
+
+        <Modal
+          isOpen={formVisible}
+          onRequestClose={closeForm}
+        >
+          <AddForm />
+        </Modal>
+
+       {/*<Button onClick={openForm}>Add Recipe</Button> */}
+      </Container>
+
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function RecipeDetails({recipe, specials}) {
 
@@ -7,34 +8,42 @@ export default function RecipeDetails({recipe, specials}) {
   }
 
   return (
-    <div>
-      <h1>{recipe.title}</h1>
-      <img src={recipe.images.medium} />
-      <p>Cooktime: {recipe.cookTime}</p>
-      <p>Description: {recipe.description}</p>
-      <p>Prep Time: {recipe.prepTime}</p>
-      <p>Servings: {recipe.servings}</p>
+    <Col className="justify-content-md-center">
+      <div className="text-center">
+        <img src={recipe.images.medium} className="detailPic"/>
+        <h2>{recipe.title}</h2>
+        <div>{recipe.description}</div>
+      </div>
+      <Row className="text-center">
+        <Col><b>Prep Time</b>: {recipe.prepTime}</Col>
+        <Col><b>Cook Time</b>: {recipe.cookTime}</Col>
+        <Col><b>Servings</b>: {recipe.servings}</Col>
+      </Row>
 
-      <h3>Ingredients</h3>
+      <Row>
+      <h3>Ingredients:</h3>
       {recipe.ingredients.map(ingredient => {
 
         var specialIndex = findSpecials(ingredient.uuid)
         var specialDetail = specials[specialIndex]
 
         return <>
-          <p><b>{ingredient.name}</b></p>
-          <p>{specialIndex !== -1 && <span>{specialDetail.title} {specialDetail.type} {specialDetail.text}</span>}</p>
-          <p>Amount: {ingredient.amount}</p>
-          <p>Measurement: {ingredient.measurement}</p>
+          <div><b>{ingredient.amount} {ingredient.measurement}</b> {ingredient.name}</div>
+          <p>{specialIndex !== -1 && <span className="specials">{specialDetail.type} &#x2022; {specialDetail.title} &#x2022; {specialDetail.text}</span>}</p>
         </>
 
       })}
+      </Row>
 
-      <h2>Directions:</h2>
-      {recipe.directions.map(direction => {
-        return <p>{direction.instructions} {direction.optional && <span> (optional)</span>}</p>
-      })}
+      <Row>
+        <h3>Directions:</h3>
+        <ul>
+        {recipe.directions.map(direction => {
+          return <li>{direction.instructions} {direction.optional && <span><b>(optional)</b></span>}</li>
+        })}
+        </ul>
+      </Row>
 
-    </div>
+    </Col>
   )
 }
