@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Recipe from './Recipe';
 import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Controller } from "react-hook-form";
 
-export default function DirectionsSection({directionFields, addInputRows, register, control}) {
+export default function DirectionsSection({directionFields, addInputRows, register, control, addOrUpdate}) {
 
   return (
       <>
@@ -11,11 +12,21 @@ export default function DirectionsSection({directionFields, addInputRows, regist
       return (<Row className="mb-3 directionRow">
         <Form.Group as={Col} sm={10} >
           <Form.Label>Instructions</Form.Label>
-          <Form.Control type="text" name="instructions" value={direction.instructions} {...register(`directions[${index}].instructions`)} control={control} />
+          <Controller control={control} name="instructions"
+            render={({direction}) => (
+              <Form.Control  type="text"  {...register(`directions[${index}].instructions`)} />
+            )}
+          />
+          {/*<Form.Control type="text" name="instructions" {...register(`directions[${index}].instructions`)} value={addOrUpdate === "update" ? direction.instructions : undefined}/>*/}
         </Form.Group>
         <Form.Group as={Col}>
           <Form.Label>Optional</Form.Label>
-          <Form.Check name="optional" value={direction.optional} {...register(`directions[${index}].optional`)} control={control}/>
+          <Controller control={control} name="optional"
+            render={({direction}) => (
+              <Form.Check  {...register(`directions[${index}].optional`)} />
+            )}
+          />
+          {/*<Form.Check name="optional" {...register(`directions[${index}].optional`)} value={addOrUpdate === "update" ? direction.optional : undefined}/>*/}
         </Form.Group>
       </Row>)
       })}
