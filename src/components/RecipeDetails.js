@@ -10,7 +10,7 @@ export default function RecipeDetails({recipe, specials}) {
   return (
     <Col className="justify-content-md-center">
       <div className="text-center">
-        <img src={recipe.images.medium} className="detailPic"/>
+        {recipe.images !== null && <img src={recipe.images.medium} className="detailPic"/>}
         <h2>{recipe.title}</h2>
         <div>{recipe.description}</div>
       </div>

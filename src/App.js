@@ -54,10 +54,10 @@ function App() {
           isOpen={formVisible}
           onRequestClose={closeForm}
         >
-          <AddForm />
+          <AddForm addOrUpdate={"add"} recipe={null} />
         </Modal>
 
-       {/*<Button onClick={openForm}>Add Recipe</Button> */}
+       {<Button onClick={openForm} className="viewButton">Add</Button>}
       </Container>
 
     </>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
 import RecipeDetails from './RecipeDetails';
-import UpdateForm from './UpdateForm';
+import AddForm from './AddForm';
 import { Button, Col } from 'react-bootstrap';
 
 export default function Recipe({ recipe, specials }) {
@@ -28,10 +28,10 @@ export default function Recipe({ recipe, specials }) {
 
   return (
     <Col sm={4} md={3} lg={2} className="text-center yellowSquare">
-      <img src={recipe.images.medium} className="circleIcon"/>
+      {recipe.images !== null && <img src={recipe.images.medium} className="circleIcon"/>}
       <div><b>{recipe.title}</b></div>
-      <Button onClick={openDetails} className="viewButton">View</Button>
-      {/*<Button onClick={openUpdate}>Update</Button>*/}
+      <Button onClick={openDetails} className="viewButton">View</Button>&nbsp;&nbsp;
+      <Button onClick={openUpdate} className="viewButton">Update</Button>
 
       <Modal
         isOpen={detailsVisible}
@@ -44,7 +44,8 @@ export default function Recipe({ recipe, specials }) {
         isOpen={updateVisible}
         onRequestClose={closeUpdate}
       >
-        <UpdateForm recipe={recipe} specials={specials}/>
+        {/*<UpdateForm recipe={recipe} specials={specials}/>*/}
+        <AddForm addOrUpdate={"update"} recipe={recipe} />
       </Modal>
 
     </Col>

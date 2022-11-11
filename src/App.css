@@ -1,3 +1,9 @@
+.addButton {
+  border: none;
+  background-color: orange;
+  border-radius: .25em;
+}
+
 .circleIcon {
   border-radius: 50%;
   width: 11em;
@@ -27,6 +33,7 @@
   background-color: black;
   color: white;
   border: 1px solid black;
+  width: 5em;
 }
 
 .viewButton:hover {
