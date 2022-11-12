@@ -1,3 +1,11 @@
+h5 {
+  margin-bottom: 0;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .addButton {
   border: none;
   background-color: orange;
@@ -9,6 +17,43 @@
   width: 11em;
   height: 11em;
 }
+
+/* RECIPE CARD */
+
+.cardCover {
+  height: 13em;
+  width: auto;
+  border-radius: .5em .5em 0 0;
+  background-size: cover;
+  margin-bottom: 1em;
+}
+
+.yellowSquare {
+  background-color: white;
+  border-radius: .5em;
+  padding-bottom: 1.5em;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 1em;
+  margin-top: 5em;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.viewButton {
+  background-color: #C98474;
+  color: white;
+  border: none;
+  width: 5em;
+  border-radius: .25em;
+}
+
+.viewButton:hover {
+  background-color: orange;
+  color: black;
+}
+
+/********/
 
 .detailPic {
   border-radius: 1em;
@@ -27,28 +72,6 @@
   font-size: small;
   font-weight: bold;
   color: #ff4500;
-}
-
-.viewButton {
-  background-color: black;
-  color: white;
-  border: 1px solid black;
-  width: 5em;
-}
-
-.viewButton:hover {
-  background-color: orange;
-  border: 1px solid orange;
-  color: black;
-}
-
-.yellowSquare {
-  background-color: #f4ca16;
-  border-radius: .5em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin-right: 1em;
-  margin-top: 5em;
 }
 
 /* .App {
