@@ -10,7 +10,7 @@ export default function Recipe({ recipe, specials, setRecipes }) {
   const [detailsVisible, setDetailsVisibile] = useState(false);
   const [updateVisible, setUpdateVisibile] = useState(false);
   const divBackground = {
-    backgroundImage: `url(${recipe.images.medium})`,
+    backgroundImage: recipe.images !== null ? `url(${recipe.images.medium})` : 'none',
   }
 
   function openDetails() {
@@ -32,7 +32,6 @@ export default function Recipe({ recipe, specials, setRecipes }) {
   return (
     <Col sm={4} md={3} lg={2} className="text-center yellowSquare">
       {recipe.images !== null && <div className="cardCover" style={divBackground}/>}
-      {/*{recipe.images !== null && <img src={recipe.images.medium} className="circleIcon"/>}*/}
       <Row style={{marginBottom: '1em'}}>
         <h5 style={{marginBottom: '.25em'}}><b>{recipe.title}</b></h5>
         <span>{recipe.cookTime} Mins &#x2022; Serves {recipe.servings}</span>

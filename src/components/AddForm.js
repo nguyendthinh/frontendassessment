@@ -103,6 +103,8 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
   return (
     <Form onSubmit={handleSubmit(data => addOrUpdateRecipe(data, addOrUpdate))}>
 
+      <h3>{addOrUpdate === "add" ? <b>NEW RECIPE</b> : <b>UPDATE RECIPE</b>}</h3>
+
       <GeneralSection register={register} control={control} errors={errors} recipe={recipe} addOrUpdate={addOrUpdate}/>
 
       <IngredientsSection register={register} control={control} errors={errors} ingredientFields={ingredientFields} addInputRows={addInputRows} addOrUpdate={addOrUpdate}/>

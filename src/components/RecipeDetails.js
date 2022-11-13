@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 export default function RecipeDetails({recipe, specials}) {
 
   const divBackground = {
-    backgroundImage: `url(${recipe.images.medium})`,
+    backgroundImage: recipe.images !== null ? `url(${recipe.images.medium})` : 'none',
     height: '20em',
     borderRadius: '1em'
   }
@@ -18,7 +18,6 @@ export default function RecipeDetails({recipe, specials}) {
       {recipe.images !== null && <div className="cardCover" style={divBackground}/>}
 
       <Row className="text-right" style={{marginBottom: ".8em"}}>
-        {/*{recipe.images !== null && <img src={recipe.images.medium} className="detailPic"/>}*/}
         <h2 className="recipeTitle"><b>{recipe.title}</b></h2>
         <i>{recipe.description}</i>
       </Row>
