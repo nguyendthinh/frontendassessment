@@ -4,17 +4,22 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Controller } from "react-hook-form";
 
 
-export default function IngredientsSection({register, control, errors, ingredientFields, addInputRows, addOrUpdate}) {
+export default function IngredientsSection({register, control, errors, ingredientFields, addInputRows, removeInputRows, addOrUpdate}) {
 
   return (
       <div className="formSection" >
-        <h5 style={{marginBottom: '1em'}}><b>INGREDIENTS</b> <button type="button" className="addButton" onClick={() => addInputRows("ingredient")}>+</button></h5>
+        <h5 style={{marginBottom: '1em'}}><b>INGREDIENTS</b>  <button title="Add another ingredient" type="button" className="addButton" onClick={() => addInputRows("ingredient")}>+</button>
+        </h5>
 
         {ingredientFields.map((ingredient, index) => {
           return (<Row className="mb-3 ingredientsRow">
 
+            <Col sm={1}>
+              <button className="removeInputRows" title="Add another ingredient" type="button" onClick={() => removeInputRows("ingredient", index)}><h5>x</h5></button>
+            </Col>
+
             <Form.Group as={Col}>
-              <Form.Label><b>Name</b></Form.Label>
+              <Form.Label><b>Name</b></Form.Label>&nbsp;&nbsp;
               <Controller control={control} name="name"
                 render={({ingredient}) => (
                   <Form.Control  type="text"  {...register(`ingredients[${index}].name`, {required: "This field is required"})} />

@@ -5,6 +5,7 @@ export default function RecipeDetails({recipe, specials}) {
 
   const divBackground = {
     backgroundImage: recipe.images !== null ? `url(${recipe.images.medium})` : 'none',
+    backgroundColor: recipe.images !== null ? 'none' : 'orange',
     height: '20em',
     borderRadius: '1em'
   }
@@ -15,7 +16,7 @@ export default function RecipeDetails({recipe, specials}) {
 
   return (
     <Col className="justify-content-md-center">
-      {recipe.images !== null && <div className="cardCover" style={divBackground}/>}
+      <div className="cardCover" style={divBackground}/>
 
       <Row className="text-right" style={{marginBottom: ".8em"}}>
         <h2 className="recipeTitle"><b>{recipe.title}</b></h2>
@@ -27,7 +28,7 @@ export default function RecipeDetails({recipe, specials}) {
         <Col><b>Servings</b>: {recipe.servings}</Col>
       </Row>
 
-      <Row style={{marginBottom: "2em"}}>
+      <Row style={{marginBottom: "1.6em"}}>
         <h4><b>Ingredients:</b></h4>
         {recipe.ingredients.map(ingredient => {
 

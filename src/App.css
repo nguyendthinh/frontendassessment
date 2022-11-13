@@ -7,13 +7,7 @@ body {
 }
 
 li {
-  margin-bottom: .5em;
-}
-
-.addButton {
-  border: none;
-  background-color: orange;
-  border-radius: .25em;
+  margin-bottom: 1em;
 }
 
 /* RECIPE CARD */
@@ -33,7 +27,7 @@ li {
   padding-right: 0;
   padding-left: 0;
   margin-right: 1em;
-  margin-top: 5em;
+  margin-top: 2em;
   height: auto;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -83,6 +77,16 @@ li {
 
 .formSection {
   margin-top: 2em;
+}
+
+.addButton, .removeInputRows {
+  border: none;
+  background-color: orange;
+  border-radius: .25em;
+}
+
+.removeInputRows {
+  margin-top: 2.2em !important;
 }
 
 /********/

@@ -48,6 +48,9 @@ function App() {
   return (
     <>
       <Container fluid="true">
+
+      <Button style={{position: 'absolute'}} onClick={openForm} className="viewButton">Add</Button>
+
         <ListView recipes={recipes} specials={specials} setRecipes={setRecipes}/>
 
         <Modal
@@ -57,7 +60,6 @@ function App() {
           <AddForm addOrUpdate={"add"} recipe={null} closeForm={closeForm} setRecipes={setRecipes}/>
         </Modal>
 
-       {<Button onClick={openForm} className="viewButton">Add</Button>}
       </Container>
 
     </>

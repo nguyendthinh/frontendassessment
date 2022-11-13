@@ -18,13 +18,13 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
     }
   });
 
-  const {fields: ingredientFields, append: ingredientAppend} = useFieldArray({
+  const {fields: ingredientFields, append: ingredientAppend, remove: ingredientRemove} = useFieldArray({
     control,
     errors,
     name: "ingredients"
   })
 
-  const {fields: directionFields, append: directionAppend} = useFieldArray({
+  const {fields: directionFields, append: directionAppend, remove: directionRemove} = useFieldArray({
     control,
     errors,
     name: "directions"
@@ -36,6 +36,14 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
         ingredientAppend({amount: "", measurement: "", name: ""})
       } else if (type === "direction") {
         directionAppend({instructions: "", optional: false})
+      }
+  }
+
+  function removeInputRows(type, index){
+      if (type === "ingredient") {
+        ingredientRemove(index)
+      } else if (type === "direction") {
+        directionRemove(index)
       }
   }
 
@@ -72,11 +80,7 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
         .then((data) => {
           updateRecipeState(addOrUpdate, data)
           closeForm()
-          console.log('Success:', data);
         })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
 
     } else if (addOrUpdate === "update") {
 
@@ -91,11 +95,8 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
         .then((data) => {
           updateRecipeState(addOrUpdate, data)
           closeForm()
-          console.log('Success:', data);
         })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+
     }
 
   }
@@ -107,9 +108,9 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
 
       <GeneralSection register={register} control={control} errors={errors} recipe={recipe} addOrUpdate={addOrUpdate}/>
 
-      <IngredientsSection register={register} control={control} errors={errors} ingredientFields={ingredientFields} addInputRows={addInputRows} addOrUpdate={addOrUpdate}/>
+      <IngredientsSection register={register} control={control} errors={errors} ingredientFields={ingredientFields} addInputRows={addInputRows} removeInputRows={removeInputRows} addOrUpdate={addOrUpdate}/>
 
-      <DirectionsSection register={register} control={control} errors={errors} directionFields={directionFields} addInputRows={addInputRows} addOrUpdate={addOrUpdate}/>
+      <DirectionsSection register={register} control={control} errors={errors} directionFields={directionFields} addInputRows={addInputRows} removeInputRows={removeInputRows} addOrUpdate={addOrUpdate}/>
 
       <Button variant="warning" type="submit">
         {addOrUpdate === "add" ? <b>Add Recipe</b> : <b>Update Recipe</b>}
