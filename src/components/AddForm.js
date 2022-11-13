@@ -11,7 +11,7 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
   const emptyIngredientsField = [{amount: "", measurement: "", name: ""}]
   const emptyDirectionsField = [{instructions: "", optional: ""}]
 
-  const {register, handleSubmit, error, control} = useForm({
+  const {register, handleSubmit, control, formState: {errors}} = useForm({
     defaultValues: {
       ingredients: addOrUpdate === "add" ? emptyIngredientsField : recipe.ingredients,
       directions: addOrUpdate === "add" ? emptyDirectionsField : recipe.directions,
@@ -20,11 +20,13 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
 
   const {fields: ingredientFields, append: ingredientAppend} = useFieldArray({
     control,
+    errors,
     name: "ingredients"
   })
 
   const {fields: directionFields, append: directionAppend} = useFieldArray({
     control,
+    errors,
     name: "directions"
   })
 
@@ -101,11 +103,11 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
   return (
     <Form onSubmit={handleSubmit(data => addOrUpdateRecipe(data, addOrUpdate))}>
 
-      <GeneralSection recipe={recipe} register={register} addOrUpdate={addOrUpdate} control={control}/>
+      <GeneralSection register={register} control={control} errors={errors} recipe={recipe} addOrUpdate={addOrUpdate}/>
 
-      <IngredientsSection ingredientFields={ingredientFields} addInputRows={addInputRows} register={register} addOrUpdate={addOrUpdate} control={control}/>
+      <IngredientsSection register={register} control={control} errors={errors} ingredientFields={ingredientFields} addInputRows={addInputRows} addOrUpdate={addOrUpdate}/>
 
-      <DirectionsSection directionFields={directionFields} addInputRows={addInputRows} register={register} addOrUpdate={addOrUpdate} control={control}/>
+      <DirectionsSection register={register} control={control} errors={errors} directionFields={directionFields} addInputRows={addInputRows} addOrUpdate={addOrUpdate}/>
 
       <Button variant="warning" type="submit">
         {addOrUpdate === "add" ? <b>Add Recipe</b> : <b>Update Recipe</b>}

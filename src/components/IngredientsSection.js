@@ -4,7 +4,7 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Controller } from "react-hook-form";
 
 
-export default function IngredientsSection({ingredientFields, addInputRows, register, control, addOrUpdate}) {
+export default function IngredientsSection({register, control, errors, ingredientFields, addInputRows, addOrUpdate}) {
 
   return (
       <>
@@ -14,27 +14,26 @@ export default function IngredientsSection({ingredientFields, addInputRows, regi
 
           <Form.Group as={Col}>
             <Form.Label>Name</Form.Label>
-            {/*<Form.Control type="text" name="name" {...register(`ingredients[${index}].name`)} value={addOrUpdate === "update" ? ingredient.name : undefined} />*/}
             <Controller control={control} name="name"
               render={({ingredient}) => (
-                <Form.Control  type="text"  {...register(`ingredients[${index}].name`)} />
+                <Form.Control  type="text"  {...register(`ingredients[${index}].name`, {required: "This field is required"})} />
               )}
             />
+            <span className="errorMessage">{errors.ingredients && errors.ingredients?.[index]?.name.message}</span>
           </Form.Group>
 
           <Form.Group as={Col}>
             <Form.Label>Amount</Form.Label>
-            {/*<Form.Control type="text" name="amount" {...register(`ingredients[${index}].amount`) } value={addOrUpdate === "update" ? ingredient.amount : undefined}/>*/}
             <Controller control={control} name="amount"
               render={({ingredient}) => (
-                <Form.Control  type="text"  {...register(`ingredients[${index}].amount`)} />
+                <Form.Control  type="number"  {...register(`ingredients[${index}].amount`, {required: "This field is required"})} />
               )}
             />
+            <span className="errorMessage">{errors.ingredients && errors.ingredients?.[index]?.amount.message}</span>
           </Form.Group>
 
          <Form.Group as={Col}>
             <Form.Label>Measurement</Form.Label>
-            {/*<Form.Control type="text" name="measurement" {...register(`ingredients[${index}].measurement`)} value={addOrUpdate === "update" ? ingredient.measurement : undefined}/>*/}
             <Controller control={control} name="measurement"
               render={({ingredient}) => (
                 <Form.Control  type="text"  {...register(`ingredients[${index}].measurement`)} />

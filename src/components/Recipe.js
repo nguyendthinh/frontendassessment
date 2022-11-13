@@ -43,6 +43,7 @@ export default function Recipe({ recipe, specials, setRecipes }) {
       <Modal
         isOpen={detailsVisible}
         onRequestClose={closeDetails}
+        name="detailsModal"
       >
         <RecipeDetails recipe={recipe} specials={specials}/>
       </Modal>
