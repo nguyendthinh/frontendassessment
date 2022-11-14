@@ -8,4 +8,4 @@
 
 - run 'npm run start:api' to initialize the API Server
 
-- run 'npm start' to start the append
+- run 'npm start' to start the app
