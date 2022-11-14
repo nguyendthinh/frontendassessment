@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import ReactDOM from 'react-dom';
 import RecipeDetails from './RecipeDetails';
 import AddUpdateForm from '../FormComponents/AddUpdateForm';
 import { Button, Col, Row } from 'react-bootstrap';

@@ -4,8 +4,7 @@ import AddUpdateForm from './FormComponents/AddUpdateForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Modal from 'react-modal';
-import ReactDOM from 'react-dom';
-import { Button, Col, Row, Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
 Modal.setAppElement("#root");
 

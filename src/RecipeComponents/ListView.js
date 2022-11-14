@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RecipeCard from './RecipeCard';
-import { Container, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 export default function ListView({recipes, specials, setRecipes}) {
 
