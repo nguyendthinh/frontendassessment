@@ -2,7 +2,7 @@
 
 - git clone the main branch from the repository
 
-- cd into the '/recipes' directory
+- cd into the '/frontendassessment' directory
 
 - run 'npm i' to install all dependencies
 
