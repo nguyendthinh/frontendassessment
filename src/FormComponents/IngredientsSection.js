@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Recipe from './Recipe';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Controller } from "react-hook-form";
 
@@ -8,15 +7,11 @@ export default function IngredientsSection({register, control, errors, ingredien
 
   return (
       <div className="formSection" >
-        <h5 style={{marginBottom: '1em'}}><b>INGREDIENTS</b>  <button title="Add another ingredient" type="button" className="addButton" onClick={() => addInputRows("ingredient")}>+</button>
+        <h5 style={{marginBottom: '1em'}}><b>INGREDIENTS</b>  <button title="Add another ingredient" type="button" className="addInputRows" onClick={() => addInputRows("ingredient")}>+</button>
         </h5>
 
         {ingredientFields.map((ingredient, index) => {
-          return (<Row className="mb-3 ingredientsRow">
-
-            <Col sm={1}>
-              <button className="removeInputRows" title="Add another ingredient" type="button" onClick={() => removeInputRows("ingredient", index)}><h5>x</h5></button>
-            </Col>
+          return (<Row key={`ingredients[${index}].uuid`} className="mb-3 ingredientsRow">
 
             <Form.Group as={Col}>
               <Form.Label><b>Name</b></Form.Label>&nbsp;&nbsp;
@@ -46,6 +41,11 @@ export default function IngredientsSection({register, control, errors, ingredien
                 )}
               />
             </Form.Group>
+
+            <Col sm={1}>
+              <button className="removeInputRows" title="Add another ingredient" type="button" onClick={() => removeInputRows("ingredient", index)}><h5>x</h5></button>
+            </Col>
+
           </Row>)
         })}
 

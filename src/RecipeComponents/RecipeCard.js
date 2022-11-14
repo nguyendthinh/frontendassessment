@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
 import RecipeDetails from './RecipeDetails';
-import AddForm from './AddForm';
+import AddUpdateForm from '../FormComponents/AddUpdateForm';
 import { Button, Col, Row } from 'react-bootstrap';
 
-export default function Recipe({ recipe, specials, setRecipes }) {
+export default function RecipeCard({ recipe, specials, setRecipes }) {
 
   const [detailsVisible, setDetailsVisibile] = useState(false);
   const [updateVisible, setUpdateVisibile] = useState(false);
@@ -31,10 +31,11 @@ export default function Recipe({ recipe, specials, setRecipes }) {
   }
 
   return (
-    <Col sm={4} md={3} lg={2} className="text-center yellowSquare">
+    <Col sm={4} md={3} lg={2} className="text-center recipeCard">
+
       <div className="cardCover" style={divBackground}/>
       <Row style={{marginBottom: '1em'}}>
-        <h5 style={{marginBottom: '.25em'}}><b>{recipe.title}</b></h5>
+        <h5 ><b>{recipe.title}</b></h5>
         <span>{recipe.cookTime} Mins &#x2022; Serves {recipe.servings}</span>
       </Row>
       <Button onClick={openDetails} className="viewButton">View</Button>&nbsp;&nbsp;
@@ -52,7 +53,7 @@ export default function Recipe({ recipe, specials, setRecipes }) {
         isOpen={updateVisible}
         onRequestClose={closeForm}
       >
-        <AddForm addOrUpdate={"update"} recipe={recipe} closeForm={closeForm} setRecipes={setRecipes}/>
+        <AddUpdateForm addOrUpdate={"update"} recipe={recipe} closeForm={closeForm} setRecipes={setRecipes}/>
       </Modal>
 
     </Col>

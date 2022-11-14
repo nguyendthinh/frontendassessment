@@ -35,10 +35,10 @@ export default function RecipeDetails({recipe, specials}) {
           var specialIndex = findSpecials(ingredient.uuid)
           var specialDetail = specials[specialIndex]
 
-          return <>
+          return (<div key={`${ingredient.name}${recipe.uuid}`}>
             <div><b>{ingredient.amount} {ingredient.measurement}</b> {ingredient.name}</div>
             <p>{specialIndex !== -1 && <span className="specials">{specialDetail.type} &#x2022; {specialDetail.title} &#x2022; {specialDetail.text}</span>}</p>
-          </>
+          </div>)
 
         })}
       </Row>
@@ -47,7 +47,7 @@ export default function RecipeDetails({recipe, specials}) {
         <h4><b>Directions:</b></h4>
         <ul>
         {recipe.directions.map(direction => {
-          return <li>{direction.instructions} {direction.optional && <span><b>(optional)</b></span>}</li>
+          return <li key={`${direction.instructions}${recipe.uuid}`}>{direction.instructions} {direction.optional && <span><b>(optional)</b></span>}</li>
         })}
         </ul>
       </Row>

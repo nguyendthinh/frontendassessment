@@ -5,7 +5,7 @@ import IngredientsSection from './IngredientsSection';
 import DirectionsSection from './DirectionsSection';
 import GeneralSection from './GeneralSection';
 
-export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
+export default function AddUpdateForm({addOrUpdate, recipe, closeForm, setRecipes}) {
 
   const recipeLink = "http://localhost:3001/recipes/"
   const emptyIngredientsField = [{amount: "", measurement: "", name: ""}]
@@ -40,9 +40,9 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
   }
 
   function removeInputRows(type, index){
-      if (type === "ingredient") {
+      if (type === "ingredient" && ingredientFields.length > 1) {
         ingredientRemove(index)
-      } else if (type === "direction") {
+      } else if (type === "direction" && directionFields.length > 1) {
         directionRemove(index)
       }
   }
@@ -64,8 +64,13 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
 
   }
 
-  function addOrUpdateRecipe(data, addOrUpdate) {
-    data.images = null
+  function addOrUpdateRecipe(data, addOrUpdate, recipe) {
+
+    if (recipe === null) {
+      data.images = null
+    } else {
+      data.images = recipe.images
+    }
 
     if (addOrUpdate === "add") {
 
@@ -102,9 +107,9 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(data => addOrUpdateRecipe(data, addOrUpdate))}>
+    <Form onSubmit={handleSubmit(data => addOrUpdateRecipe(data, addOrUpdate, recipe))}>
 
-      <h3>{addOrUpdate === "add" ? <b>NEW RECIPE</b> : <b>UPDATE RECIPE</b>}</h3>
+      <h3 className="formTitle">{addOrUpdate === "add" ? <b>NEW RECIPE</b> : <b>UPDATE RECIPE</b>}</h3>
 
       <GeneralSection register={register} control={control} errors={errors} recipe={recipe} addOrUpdate={addOrUpdate}/>
 
@@ -112,9 +117,10 @@ export default function AddForm({addOrUpdate, recipe, closeForm, setRecipes}) {
 
       <DirectionsSection register={register} control={control} errors={errors} directionFields={directionFields} addInputRows={addInputRows} removeInputRows={removeInputRows} addOrUpdate={addOrUpdate}/>
 
-      <Button variant="warning" type="submit">
+      <Button variant="warning" type="submit" className="formButton">
         {addOrUpdate === "add" ? <b>Add Recipe</b> : <b>Update Recipe</b>}
       </Button>
+
     </Form>
     )
 }

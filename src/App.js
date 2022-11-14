@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ListView from './components/ListView';
-import AddForm from './components/AddForm';
+import ListView from './RecipeComponents/ListView';
+import AddUpdateForm from './FormComponents/AddUpdateForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Modal from 'react-modal';
@@ -49,7 +49,7 @@ function App() {
     <>
       <Container fluid="true">
 
-      <Button style={{position: 'absolute'}} onClick={openForm} className="viewButton">Add</Button>
+      <Button onClick={openForm} className="addNewRecipe viewButton">Add</Button>
 
         <ListView recipes={recipes} specials={specials} setRecipes={setRecipes}/>
 
@@ -57,7 +57,7 @@ function App() {
           isOpen={formVisible}
           onRequestClose={closeForm}
         >
-          <AddForm addOrUpdate={"add"} recipe={null} closeForm={closeForm} setRecipes={setRecipes}/>
+          <AddUpdateForm addOrUpdate={"add"} recipe={null} closeForm={closeForm} setRecipes={setRecipes}/>
         </Modal>
 
       </Container>
